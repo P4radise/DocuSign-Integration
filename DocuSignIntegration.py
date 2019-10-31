@@ -58,13 +58,13 @@ class Integration(object):
     def start_import(self, filename):
         import_id = self.get_import()
         if import_id != '':
-            url = 'https://' + self.url_onevizion + '/api/v3/imports/' + str(import_id) + '/run'
+            url = 'http://' + self.url_onevizion + '/api/v3/imports/' + str(import_id) + '/run'
             files = {'file': (filename, open(filename, 'rb'))}
             requests.post(url, files=files, headers=self.headers, auth=self.auth_onevizion)
         else: self.message('Import \"' + self.import_name + '\" not found')
 
     def get_import(self):
-        url = 'https://' + self.url_onevizion + '/api/v3/imports'
+        url = 'http://' + self.url_onevizion + '/api/v3/imports'
         answer = requests.get(url, headers=self.headers, auth=self.auth_onevizion)
         response = answer.json()
 
@@ -78,7 +78,7 @@ class Integration(object):
         return import_id
 
     def url_setting(self, url):
-        url_re_start = re.search('^https', url)
+        url_re_start = re.search('^http', url)
         url_re_finish = re.search('/$', url)
         if url_re_start is not None and url_re_finish is not None:
             url_split = re.split('://',url[:-1],2)
