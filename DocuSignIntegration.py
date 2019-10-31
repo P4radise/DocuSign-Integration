@@ -61,7 +61,7 @@ class Integration(object):
             url = 'http://' + self.url_onevizion + '/api/v3/imports/' + str(import_id) + '/run'
             data = {'action':'INSERT_UPDATE'}
             files = {'file': (filename, open(filename, 'rb'))}
-            requests.post(url, files=files, data=json.dumps(data), headers=self.headers, auth=self.auth_onevizion)
+            requests.post(url, files=files, params=data, headers=self.headers, auth=self.auth_onevizion)
         else: self.message('Import \"' + self.import_name + '\" not found')
 
     def get_import(self):
